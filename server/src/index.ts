@@ -4,7 +4,7 @@ import {
   GraphQLSchema,
   GraphQLString,
 } from "graphql";
-import Pokemon from "./helpers/utils";
+import Pokemon from "./helpers/types";
 
 const express = require("express");
 const { createHandler } = require("graphql-http/lib/use/express");
