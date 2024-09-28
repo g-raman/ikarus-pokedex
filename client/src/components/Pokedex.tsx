@@ -1,5 +1,6 @@
 import { Table, TableColumnsType } from "antd";
-import Pokemon from "../utils/types";
+import { Pokemon } from "../utils/types";
+import { PokemonTypeBadge } from "./PokemonTypeBadge";
 
 const data = [
   {
@@ -10,7 +11,7 @@ const data = [
       chinese: "妙蛙种子",
       french: "Bulbizarre",
     },
-    type: ["Grass", "Poison"],
+    type: ["Bug", "Poison"],
     base: {
       HP: 45,
       Attack: 49,
@@ -200,6 +201,11 @@ const columns: TableColumnsType<Pokemon> = [
     title: "Type",
     dataIndex: "type",
     key: "type",
+    render(value, { id, name }) {
+      return (
+        <PokemonTypeBadge key={`${name.english}${id}`} id={id} types={value} />
+      );
+    },
   },
   {
     title: "HP",

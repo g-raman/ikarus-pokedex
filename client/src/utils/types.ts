@@ -1,4 +1,4 @@
-enum PokemonType {
+export enum PokemonType {
   Normal,
   Fire,
   Water,
@@ -19,7 +19,7 @@ enum PokemonType {
   Fairy,
 }
 
-interface Pokemon {
+export interface Pokemon {
   id: number;
   name: {
     english: string;
@@ -37,5 +37,3 @@ interface Pokemon {
     Speed: number;
   };
 }
-
-export default Pokemon;
