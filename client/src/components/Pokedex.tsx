@@ -1,9 +1,9 @@
 import { Input, Select, Spin, Table, TableColumnsType } from "antd";
 import { Pokemon } from "../utils/types";
 import { PokemonTypeBadge } from "./PokemonTypeBadge";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useLazyQuery } from "@apollo/client";
 import { pokemonTypes } from "../utils/PokemonTypeColourMap";
-import { ChangeEvent, ChangeEventHandler, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 const columns: TableColumnsType<Pokemon> = [
   {
@@ -81,13 +81,13 @@ const QUERY_ALL_POKEMON = gql`
 export const Pokedex = () => {
   const [type, setType] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
-  const { data, refetch } = useQuery(QUERY_ALL_POKEMON, {
+  const [fetchPokemon, { data }] = useLazyQuery(QUERY_ALL_POKEMON, {
     variables: { type, query: debouncedQuery },
   });
 
   function handleTypeSelection(selection: string) {
     setType(selection);
-    refetch();
+    fetchPokemon();
   }
 
   function handleQueryChange(event: ChangeEvent<HTMLInputElement>) {
@@ -105,6 +105,10 @@ export const Pokedex = () => {
   }
 
   const debounceHandleQueryChange = debounce(handleQueryChange, 500);
+
+  useEffect(() => {
+    fetchPokemon();
+  }, [fetchPokemon]);
 
   if (!data) {
     return <Spin size="large" />;
