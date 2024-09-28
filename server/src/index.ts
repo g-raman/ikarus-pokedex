@@ -1,5 +1,4 @@
 import {
-  GraphQLInt,
   GraphQLList,
   GraphQLObjectType,
   GraphQLSchema,
@@ -33,15 +32,21 @@ const queryType = new GraphQLObjectType({
       type: new GraphQLList(pokemonType),
       args: {
         query: { type: GraphQLString },
-        take: { type: GraphQLInt },
-        skip: { type: GraphQLInt },
+        type: { type: GraphQLString },
       },
-      resolve: (_, { query }) => {
+      resolve: (_, { query, type }) => {
+        let results: Pokemon[];
         if (!query) {
-          return pokedex;
+          results = pokedex;
+        } else {
+          results = fuse.search(query).map((result) => result.item);
         }
 
-        return fuse.search(query).map((result) => result.item);
+        if (!type) {
+          return results;
+        }
+
+        return results.filter((pokemon) => pokemon.type.includes(type));
       },
     },
     pokemon: {
