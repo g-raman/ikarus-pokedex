@@ -9,6 +9,7 @@ import Pokemon from "./helpers/utils";
 const express = require("express");
 const { createHandler } = require("graphql-http/lib/use/express");
 const { ruruHTML } = require("ruru/server");
+const cors = require("cors");
 const { pokemonType } = require("./schema/schema.ts");
 const pokedex: [Pokemon] = require("./data/pokedex.json");
 
@@ -38,6 +39,8 @@ const queryType = new GraphQLObjectType({
 const schema = new GraphQLSchema({ query: queryType });
 
 const app = express();
+
+app.use(cors());
 
 app.all(
   "/graphql",
