@@ -1,17 +1,36 @@
-import { GraphQLList, GraphQLObjectType, GraphQLSchema } from "graphql";
+import {
+  GraphQLList,
+  GraphQLObjectType,
+  GraphQLSchema,
+  GraphQLString,
+} from "graphql";
+import Pokemon from "./helpers/utils";
 
 const express = require("express");
 const { createHandler } = require("graphql-http/lib/use/express");
 const { ruruHTML } = require("ruru/server");
 const { pokemonType } = require("./schema/schema.ts");
-const pokedex = require("./data/pokedex.json");
+const pokedex: [Pokemon] = require("./data/pokedex.json");
 
 const queryType = new GraphQLObjectType({
   name: "Query",
   fields: {
-    pokemon: {
+    pokemons: {
       type: new GraphQLList(pokemonType),
       resolve: () => pokedex,
+    },
+    pokemon: {
+      type: pokemonType,
+      args: {
+        name: { type: GraphQLString },
+      },
+      resolve: (_, { name }) => {
+        const found = pokedex.find(
+          (pokemon) =>
+            pokemon.name.english.toLowerCase() === name.toLowerCase(),
+        );
+        return found;
+      },
     },
   },
 });
