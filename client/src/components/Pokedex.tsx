@@ -1,4 +1,5 @@
-import { Table } from "antd";
+import { Table, TableColumnsType } from "antd";
+import Pokemon from "../utils/types";
 
 const data = [
   {
@@ -183,11 +184,12 @@ const data = [
   },
 ];
 
-const columns = [
+const columns: TableColumnsType<Pokemon> = [
   {
     title: "#",
     dataIndex: "id",
     key: "id",
+    sorter: (rowA, rowB) => rowB.id - rowA.id,
   },
   {
     title: "Name",
@@ -203,29 +205,34 @@ const columns = [
     title: "HP",
     dataIndex: ["base", "HP"],
     key: "HP",
+    sorter: (rowA, rowB) => rowB.base.HP - rowA.base.HP,
   },
   {
     title: "Attack",
     dataIndex: ["base", "Attack"],
     key: "Attack",
+    sorter: (rowA, rowB) => rowB.base.Attack - rowA.base.Attack,
   },
   {
     title: "Defense",
     dataIndex: ["base", "Defense"],
     key: "Defense",
+    sorter: (rowA, rowB) => rowB.base.Defense - rowA.base.Defense,
   },
   {
     title: "SpAtk",
     dataIndex: ["base", "SpAttack"],
     key: "SpAttack",
+    sorter: (rowA, rowB) => rowB.base.SpAttack - rowA.base.SpAttack,
   },
   {
     title: "SpDef",
     dataIndex: ["base", "SpDefense"],
     key: "SpDefense",
+    sorter: (rowA, rowB) => rowB.base.SpDefense - rowA.base.SpDefense,
   },
 ];
 
 export const Pokedex = () => {
-  return <Table dataSource={data} columns={columns} />;
+  return <Table<Pokemon> dataSource={data} columns={columns} />;
 };
