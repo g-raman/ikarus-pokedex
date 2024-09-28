@@ -27,7 +27,7 @@ interface Pokemon {
     chinese: string;
     french: string;
   };
-  type: PokemonType;
+  type: PokemonType[];
   base: {
     HP: number;
     Attack: number;
