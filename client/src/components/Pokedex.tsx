@@ -1,4 +1,4 @@
-import { Input, Select, Spin, Table, TableColumnsType } from "antd";
+import { Button, Input, Select, Spin, Table, TableColumnsType } from "antd";
 import { Pokemon } from "../utils/types";
 import { PokemonTypeBadge } from "./PokemonTypeBadge";
 import { gql, useLazyQuery } from "@apollo/client";
@@ -106,6 +106,11 @@ export const Pokedex = () => {
 
   const debounceHandleQueryChange = debounce(handleQueryChange, 500);
 
+  function handleReset() {
+    setDebouncedQuery("");
+    setType("");
+  }
+
   useEffect(() => {
     fetchPokemon();
   }, [fetchPokemon]);
@@ -120,10 +125,14 @@ export const Pokedex = () => {
         <Input onChange={debounceHandleQueryChange} />
         <Select
           className="w-1/4"
-          placeholder={"Select a type"}
+          placeholder="Select a type"
+          value={type}
           options={pokemonTypes}
           onSelect={handleTypeSelection}
         />
+        <Button type="primary" onClick={handleReset}>
+          Reset
+        </Button>
       </div>
       <Table<Pokemon>
         pagination={{
