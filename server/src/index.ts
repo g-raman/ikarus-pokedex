@@ -36,7 +36,11 @@ const queryType = new GraphQLObjectType({
         take: { type: GraphQLInt },
         skip: { type: GraphQLInt },
       },
-      resolve: (_, { query = "", take = 10, skip = 0 }) => {
+      resolve: (_, { query, take = 10, skip = 0 }) => {
+        if (!query) {
+          return pokedex.slice(0 + skip, take + skip);
+        }
+
         return fuse
           .search(query)
           .map((result) => result.item)
