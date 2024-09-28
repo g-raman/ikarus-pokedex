@@ -1,4 +1,5 @@
 import {
+  GraphQLInt,
   GraphQLList,
   GraphQLObjectType,
   GraphQLSchema,
@@ -18,7 +19,12 @@ const queryType = new GraphQLObjectType({
   fields: {
     pokemons: {
       type: new GraphQLList(pokemonType),
-      resolve: () => pokedex,
+      args: {
+        take: { type: GraphQLInt },
+        skip: { type: GraphQLInt },
+      },
+      resolve: (_, { take = 10, skip = 0 }) =>
+        pokedex.slice(0 + skip, take + skip),
     },
     pokemon: {
       type: pokemonType,
