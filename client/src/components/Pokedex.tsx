@@ -80,10 +80,9 @@ const QUERY_ALL_POKEMON = gql`
 
 export const Pokedex = () => {
   const [type, setType] = useState("");
-  const [query, setQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
   const { data, refetch } = useQuery(QUERY_ALL_POKEMON, {
-    variables: { type, query },
+    variables: { type, query: debouncedQuery },
   });
 
   function handleTypeSelection(selection: string) {
@@ -92,7 +91,7 @@ export const Pokedex = () => {
   }
 
   function handleQueryChange(event: ChangeEvent<HTMLInputElement>) {
-    setQuery(event.target.value);
+    setDebouncedQuery(event.target.value);
   }
 
   function debounce(fn, delay: number) {
