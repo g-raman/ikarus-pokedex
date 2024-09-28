@@ -115,14 +115,16 @@ export const Pokedex = () => {
   }
 
   return (
-    <div>
-      <Input onChange={debounceHandleQueryChange} />
-      <Select
-        className="w-32"
-        placeholder={"Select a type"}
-        options={pokemonTypes}
-        onSelect={handleTypeSelection}
-      />
+    <div className="px-32 py-16">
+      <div className="flex gap-4">
+        <Input onChange={debounceHandleQueryChange} />
+        <Select
+          className="w-1/4"
+          placeholder={"Select a type"}
+          options={pokemonTypes}
+          onSelect={handleTypeSelection}
+        />
+      </div>
       <Table<Pokemon>
         pagination={{
           defaultPageSize: 10,
