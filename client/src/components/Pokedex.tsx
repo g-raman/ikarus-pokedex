@@ -1,7 +1,9 @@
-import { Table, TableColumnsType } from "antd";
+import { Input, Select, Spin, Table, TableColumnsType } from "antd";
 import { Pokemon } from "../utils/types";
 import { PokemonTypeBadge } from "./PokemonTypeBadge";
 import { gql, useQuery } from "@apollo/client";
+import { pokemonTypes } from "../utils/PokemonTypeColourMap";
+import { ChangeEvent, ChangeEventHandler, useState } from "react";
 
 const columns: TableColumnsType<Pokemon> = [
   {
@@ -58,8 +60,8 @@ const columns: TableColumnsType<Pokemon> = [
 ];
 
 const QUERY_ALL_POKEMON = gql`
-  query {
-    pokemons(query: "") {
+  query ($query: String, $type: String) {
+    pokemons(query: $query, type: $type) {
       id
       name {
         english
@@ -77,21 +79,57 @@ const QUERY_ALL_POKEMON = gql`
 `;
 
 export const Pokedex = () => {
-  const { data } = useQuery(QUERY_ALL_POKEMON);
+  const [type, setType] = useState("");
+  const [query, setQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+  const { data, refetch } = useQuery(QUERY_ALL_POKEMON, {
+    variables: { type, query },
+  });
+
+  function handleTypeSelection(selection: string) {
+    setType(selection);
+    refetch();
+  }
+
+  function handleQueryChange(event: ChangeEvent<HTMLInputElement>) {
+    setQuery(event.target.value);
+  }
+
+  function debounce(fn, delay: number) {
+    let timeoutId: number;
+    return (...args) => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        fn(...args);
+      }, delay);
+    };
+  }
+
+  const debounceHandleQueryChange = debounce(handleQueryChange, 500);
+
   if (!data) {
-    return <div>Loading...</div>;
+    return <Spin size="large" />;
   }
 
   return (
-    <Table<Pokemon>
-      pagination={{
-        defaultPageSize: 10,
-        showPrevNextJumpers: true,
-        showSizeChanger: true,
-        position: ["topRight", "bottomRight"],
-      }}
-      dataSource={data.pokemons}
-      columns={columns}
-    />
+    <div>
+      <Input onChange={debounceHandleQueryChange} />
+      <Select
+        className="w-32"
+        placeholder={"Select a type"}
+        options={pokemonTypes}
+        onSelect={handleTypeSelection}
+      />
+      <Table<Pokemon>
+        pagination={{
+          defaultPageSize: 10,
+          showPrevNextJumpers: true,
+          showSizeChanger: true,
+          position: ["topRight", "bottomRight"],
+        }}
+        dataSource={data.pokemons}
+        columns={columns}
+      />
+    </div>
   );
 };
