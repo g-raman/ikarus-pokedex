@@ -82,5 +82,16 @@ export const Pokedex = () => {
     return <div>Loading...</div>;
   }
 
-  return <Table<Pokemon> dataSource={data.pokemons} columns={columns} />;
+  return (
+    <Table<Pokemon>
+      pagination={{
+        defaultPageSize: 10,
+        showPrevNextJumpers: true,
+        showSizeChanger: true,
+        position: ["topRight", "bottomRight"],
+      }}
+      dataSource={data.pokemons}
+      columns={columns}
+    />
+  );
 };
