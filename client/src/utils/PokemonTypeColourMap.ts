@@ -19,4 +19,25 @@ const PokemonTypeColourMap = new Map<string, string>([
   ["Fairy", "bg-[#ee99ee]"],
 ]);
 
+export const pokemonTypes = [
+  { label: "Normal", value: "Normal" },
+  { label: "Fire", value: "Fire" },
+  { label: "Water", value: "Water" },
+  { label: "Electric", value: "Electric" },
+  { label: "Grass", value: "Grass" },
+  { label: "Ice", value: "Ice" },
+  { label: "Fighting", value: "Fighting" },
+  { label: "Poison", value: "Poison" },
+  { label: "Ground", value: "Ground" },
+  { label: "Flying", value: "Flying" },
+  { label: "Psychic", value: "Psychic" },
+  { label: "Bug", value: "Bug" },
+  { label: "Rock", value: "Rock" },
+  { label: "Ghost", value: "Ghost" },
+  { label: "Dragon", value: "Dragon" },
+  { label: "Dark", value: "Dark" },
+  { label: "Steel", value: "Steel" },
+  { label: "Fairy", value: "Fairy" },
+];
+
 export default PokemonTypeColourMap;
