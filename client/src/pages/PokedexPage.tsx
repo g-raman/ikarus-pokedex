@@ -145,7 +145,10 @@ export const PokedexPage = () => {
 
       <div className="px-32">
         <div className="flex gap-4">
-          <Input onChange={debounceHandleQueryChange} />
+          <Input
+            placeholder="Search for a Pokemon..."
+            onChange={debounceHandleQueryChange}
+          />
           <Select
             className="w-1/4"
             placeholder="Select a type"
