@@ -1,6 +1,13 @@
 import { Progress } from "antd";
+import { Pokemon } from "../utils/types";
 
-export const PokemonStatsComponent = ({ pokemon }) => {
+interface PokemonStatsComponentProps {
+  pokemon: Pokemon;
+}
+
+export const PokemonStatsComponent: React.FC<PokemonStatsComponentProps> = ({
+  pokemon,
+}) => {
   const stats = pokemon.base;
   const maxStat =
     Math.max(
