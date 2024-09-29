@@ -1,24 +1,3 @@
-export enum PokemonType {
-  Normal,
-  Fire,
-  Water,
-  Electric,
-  Grass,
-  Ice,
-  Fighting,
-  Poison,
-  Ground,
-  Flying,
-  Psychic,
-  Bug,
-  Rock,
-  Ghost,
-  Dragon,
-  Dark,
-  Steel,
-  Fairy,
-}
-
 export interface Pokemon {
   id: number;
   name: {
@@ -27,7 +6,7 @@ export interface Pokemon {
     chinese: string;
     french: string;
   };
-  type: PokemonType[];
+  type: string[];
   base: {
     HP: number;
     Attack: number;
