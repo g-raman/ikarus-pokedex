@@ -15,7 +15,7 @@ function App() {
       element: <Pokedex />,
     },
     {
-      path: "/pokemon/:name",
+      path: "pokemon/:name",
       element: <Pokemon />,
     },
   ]);
