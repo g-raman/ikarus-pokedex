@@ -4,6 +4,7 @@ import { PokemonTypeBadge } from "./PokemonTypeBadge";
 import { gql, useLazyQuery } from "@apollo/client";
 import { pokemonTypes } from "../utils/PokemonTypeColourMap";
 import { ChangeEvent, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const columns: TableColumnsType<Pokemon> = [
   {
@@ -16,6 +17,14 @@ const columns: TableColumnsType<Pokemon> = [
     title: "Name",
     dataIndex: ["name", "english"],
     key: "name",
+    render: (value) => {
+      const name = String(value).toLowerCase();
+      return (
+        <Link className="text-blue-500 underline" to={`/pokemon/${name}`}>
+          {value}
+        </Link>
+      );
+    },
   },
   {
     title: "Type",
