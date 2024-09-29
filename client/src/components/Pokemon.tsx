@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import { Image, Progress, Spin } from "antd";
+import { Image, Spin } from "antd";
 import { useParams } from "react-router-dom";
 import { Pokemon as PokemonType } from "../utils/types";
 import { PokemonTypeBadge } from "./PokemonTypeBadge";
@@ -45,17 +45,8 @@ export const Pokemon = () => {
     stats.SpDefense +
     stats.Speed;
 
-  const maxStat = Math.max(
-    stats.HP,
-    stats.Attack,
-    stats.Defense,
-    stats.SpAttack,
-    stats.SpDefense,
-    stats.Speed,
-  );
-
   return (
-    <div className="px-32 py-16">
+    <div className="flex flex-col justify-center items-center px-32 py-16 gap-8">
       <div className="flex justify-center gap-8">
         <Image src={`https://img.pokemondb.net/artwork/${name}.jpg`} />
         <div className="flex flex-col gap-4 text-3xl">
@@ -67,12 +58,12 @@ export const Pokemon = () => {
 
           <PokemonTypeBadge id={pokemon.id} types={pokemon.type} />
         </div>
-
-        <div className="flex flex-col w-1/2">
-          <PokemonStatsComponent pokemon={pokemon} />
-        </div>
       </div>
-      <p>Total: {statsTotal}</p>
+
+      <div className="flex flex-col w-1/2 gap-4">
+        <PokemonStatsComponent pokemon={pokemon} />
+        <p className="text-xl font-bold">Total: {statsTotal}</p>
+      </div>
     </div>
   );
 };
