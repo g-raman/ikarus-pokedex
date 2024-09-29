@@ -6,6 +6,7 @@ import { pokemonTypes } from "../utils/PokemonTypeColourMap";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Footer } from "../layout/Footer";
+import { Header } from "../layout/Header";
 
 const columns: TableColumnsType<Pokemon> = [
   {
@@ -140,6 +141,8 @@ export const PokedexPage = () => {
 
   return (
     <>
+      <Header />
+
       <div className="px-32">
         <div className="flex gap-4">
           <Input onChange={debounceHandleQueryChange} />

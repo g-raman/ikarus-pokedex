@@ -5,6 +5,7 @@ import { Pokemon } from "../utils/types";
 import { PokemonTypeBadge } from "../components/PokemonTypeBadge";
 import { PokemonStatsComponent } from "../components/PokemonStatsComponent";
 import { Footer } from "../layout/Footer";
+import { Header } from "../layout/Header";
 
 const QUERY_POKEMON = gql`
   query ($name: String) {
@@ -48,6 +49,8 @@ export const PokemonPage = () => {
 
   return (
     <>
+      <Header />
+
       <div className="flex flex-col justify-center items-center px-32 gap-8">
         <div className="flex justify-center gap-8">
           <Image src={`https://img.pokemondb.net/artwork/${name}.jpg`} />
