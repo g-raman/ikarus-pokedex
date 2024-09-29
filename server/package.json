@@ -5,7 +5,8 @@
   "main": "index.ts",
   "scripts": {
     "dev": "nodemon api/index.ts",
-    "build": "tsc --build ./tsconfig.json && mkdir -p ./dist/data/ && cp ./api/data/pokedex.json ./dist/data/"
+    "build": "tsc --build ./tsconfig.json && mkdir -p ./dist/data/ && cp ./api/data/pokedex.json ./dist/data/",
+    "vercel-build": "echo hello"
   },
   "author": "Raman Gupta",
   "license": "ISC",
