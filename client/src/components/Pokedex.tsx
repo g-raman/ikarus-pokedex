@@ -55,16 +55,22 @@ const columns: TableColumnsType<Pokemon> = [
     sorter: (rowA, rowB) => rowB.base.Defense - rowA.base.Defense,
   },
   {
-    title: "SpAtk",
+    title: "Sp Atk",
     dataIndex: ["base", "SpAttack"],
     key: "SpAttack",
     sorter: (rowA, rowB) => rowB.base.SpAttack - rowA.base.SpAttack,
   },
   {
-    title: "SpDef",
+    title: "Sp Def",
     dataIndex: ["base", "SpDefense"],
     key: "SpDefense",
     sorter: (rowA, rowB) => rowB.base.SpDefense - rowA.base.SpDefense,
+  },
+  {
+    title: "Speed",
+    dataIndex: ["base", "Speed"],
+    key: "Speed",
+    sorter: (rowA, rowB) => rowB.base.Speed - rowA.base.Speed,
   },
 ];
 
@@ -82,6 +88,7 @@ const QUERY_ALL_POKEMON = gql`
         Defense
         SpAttack
         SpDefense
+        Speed
       }
     }
   }
