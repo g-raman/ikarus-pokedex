@@ -5,6 +5,7 @@ import { gql, useLazyQuery } from "@apollo/client";
 import { pokemonTypes } from "../utils/PokemonTypeColourMap";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Footer } from "../layout/Footer";
 
 const columns: TableColumnsType<Pokemon> = [
   {
@@ -138,30 +139,34 @@ export const PokedexPage = () => {
   }
 
   return (
-    <div className="px-32 py-16">
-      <div className="flex gap-4">
-        <Input onChange={debounceHandleQueryChange} />
-        <Select
-          className="w-1/4"
-          placeholder="Select a type"
-          value={type}
-          options={pokemonTypes}
-          onSelect={handleTypeSelection}
+    <>
+      <div className="px-32">
+        <div className="flex gap-4">
+          <Input onChange={debounceHandleQueryChange} />
+          <Select
+            className="w-1/4"
+            placeholder="Select a type"
+            value={type}
+            options={pokemonTypes}
+            onSelect={handleTypeSelection}
+          />
+          <Button type="primary" onClick={handleReset}>
+            Reset
+          </Button>
+        </div>
+        <Table<Pokemon>
+          pagination={{
+            defaultPageSize: 10,
+            showPrevNextJumpers: true,
+            showSizeChanger: true,
+            position: ["topRight", "bottomRight"],
+          }}
+          dataSource={data.pokemons}
+          columns={columns}
         />
-        <Button type="primary" onClick={handleReset}>
-          Reset
-        </Button>
       </div>
-      <Table<Pokemon>
-        pagination={{
-          defaultPageSize: 10,
-          showPrevNextJumpers: true,
-          showSizeChanger: true,
-          position: ["topRight", "bottomRight"],
-        }}
-        dataSource={data.pokemons}
-        columns={columns}
-      />
-    </div>
+
+      <Footer />
+    </>
   );
 };

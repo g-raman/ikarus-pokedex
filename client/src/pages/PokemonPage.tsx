@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Pokemon } from "../utils/types";
 import { PokemonTypeBadge } from "../components/PokemonTypeBadge";
 import { PokemonStatsComponent } from "../components/PokemonStatsComponent";
+import { Footer } from "../layout/Footer";
 
 const QUERY_POKEMON = gql`
   query ($name: String) {
@@ -46,28 +47,32 @@ export const PokemonPage = () => {
     stats.Speed;
 
   return (
-    <div className="flex flex-col justify-center items-center px-32 py-16 gap-8">
-      <div className="flex justify-center gap-8">
-        <Image src={`https://img.pokemondb.net/artwork/${name}.jpg`} />
-        <div className="flex flex-col gap-4 text-3xl justify-between">
-          <p className="font-bold text-7xl">{pokemon.name.english}</p>
+    <>
+      <div className="flex flex-col justify-center items-center px-32 gap-8">
+        <div className="flex justify-center gap-8">
+          <Image src={`https://img.pokemondb.net/artwork/${name}.jpg`} />
+          <div className="flex flex-col gap-4 text-3xl justify-between">
+            <p className="font-bold text-7xl">{pokemon.name.english}</p>
 
-          <div className="flex gap-2 text-base">
-            {pokemon.type.map((type) => (
-              <PokemonTypeBadge id={pokemon.id} type={type} />
-            ))}
+            <div className="flex gap-2 text-base">
+              {pokemon.type.map((type) => (
+                <PokemonTypeBadge id={pokemon.id} type={type} />
+              ))}
+            </div>
+
+            <p>French: {pokemon.name.french}</p>
+            <p>Japanese: {pokemon.name.japanese}</p>
+            <p>Chinese: {pokemon.name.chinese}</p>
           </div>
+        </div>
 
-          <p>French: {pokemon.name.french}</p>
-          <p>Japanese: {pokemon.name.japanese}</p>
-          <p>Chinese: {pokemon.name.chinese}</p>
+        <div className="flex flex-col w-1/2 gap-4">
+          <PokemonStatsComponent pokemon={pokemon} />
+          <p className="text-xl font-bold">Total: {statsTotal}</p>
         </div>
       </div>
 
-      <div className="flex flex-col w-1/2 gap-4">
-        <PokemonStatsComponent pokemon={pokemon} />
-        <p className="text-xl font-bold">Total: {statsTotal}</p>
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 };
