@@ -12,8 +12,8 @@ const express = require("express");
 const { createHandler } = require("graphql-http/lib/use/express");
 const { ruruHTML } = require("ruru/server");
 const cors = require("cors");
-const { pokemonType } = require("./schema/schema.ts");
-const pokedex: [Pokemon] = require("./data/pokedex.json");
+const { pokemonType } = require("./schema/schema");
+const pokedex = require("./data/pokedex.json");
 
 const searchOptions: IFuseOptions<Pokemon> = {
   isCaseSensitive: false,
