@@ -3,10 +3,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { PokedexPage } from "./pages/PokedexPage";
 import { PokemonPage } from "./pages/PokemonPage";
 
+const GRAPHQL_ENDPOINT = import.meta.env.VITE_GRAPHQL_ENDPOINT;
 function App() {
   const client = new ApolloClient({
     cache: new InMemoryCache(),
-    uri: "http://localhost:3000/graphql",
+    uri: GRAPHQL_ENDPOINT,
   });
 
   const router = createBrowserRouter([
