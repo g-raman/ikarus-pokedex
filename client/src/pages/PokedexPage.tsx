@@ -34,7 +34,10 @@ const columns: TableColumnsType<Pokemon> = [
     key: "type",
     render(value, { id, name }) {
       return value.map((type: string[]) => (
-        <div key={`${name.english}${id}`} className="flex flex-col gap-4 mb-2">
+        <div
+          key={`${name.english}${type}${id}`}
+          className="flex flex-col gap-4 mb-2"
+        >
           <PokemonTypeBadge id={id} type={type} />
         </div>
       ));
