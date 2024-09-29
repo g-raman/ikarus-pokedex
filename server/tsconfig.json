@@ -6,6 +6,6 @@
       "outDir": "dist",
       "sourceMap": true,
     },
-  "include": ["api/**/*.ts"],
+  "include": ["./api/**/*.ts"],
   "exclude": ["node_modules"],
 }
