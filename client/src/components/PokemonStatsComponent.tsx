@@ -2,14 +2,15 @@ import { Progress } from "antd";
 
 export const PokemonStatsComponent = ({ pokemon }) => {
   const stats = pokemon.base;
-  const maxStat = Math.max(
-    stats.HP,
-    stats.Attack,
-    stats.Defense,
-    stats.SpAttack,
-    stats.SpDefense,
-    stats.Speed,
-  );
+  const maxStat =
+    Math.max(
+      stats.HP,
+      stats.Attack,
+      stats.Defense,
+      stats.SpAttack,
+      stats.SpDefense,
+      stats.Speed,
+    ) + 20;
 
   return (
     <div>
