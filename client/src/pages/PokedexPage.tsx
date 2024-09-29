@@ -1,6 +1,6 @@
 import { Button, Input, Select, Spin, Table, TableColumnsType } from "antd";
 import { Pokemon } from "../utils/types";
-import { PokemonTypeBadge } from "./PokemonTypeBadge";
+import { PokemonTypeBadge } from "../components/PokemonTypeBadge";
 import { gql, useLazyQuery } from "@apollo/client";
 import { pokemonTypes } from "../utils/PokemonTypeColourMap";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -96,7 +96,7 @@ const QUERY_ALL_POKEMON = gql`
   }
 `;
 
-export const Pokedex = () => {
+export const PokedexPage = () => {
   const [type, setType] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
   const [fetchPokemon, { data }] = useLazyQuery(QUERY_ALL_POKEMON, {
