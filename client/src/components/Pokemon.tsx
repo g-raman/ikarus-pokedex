@@ -1,8 +1,9 @@
 import { gql, useQuery } from "@apollo/client";
-import { Image, Spin } from "antd";
+import { Image, Progress, Spin } from "antd";
 import { useParams } from "react-router-dom";
 import { Pokemon as PokemonType } from "../utils/types";
 import { PokemonTypeBadge } from "./PokemonTypeBadge";
+import { PokemonStatsComponent } from "./PokemonStatsComponent";
 
 const QUERY_POKEMON = gql`
   query ($name: String) {
@@ -21,6 +22,7 @@ const QUERY_POKEMON = gql`
         Defense
         SpAttack
         SpDefense
+        Speed
       }
     }
   }
@@ -34,15 +36,30 @@ export const Pokemon = () => {
     return <Spin size="large" />;
   }
   const pokemon: PokemonType = data.pokemon;
+  const stats = pokemon.base;
+  const statsTotal =
+    stats.HP +
+    stats.Attack +
+    stats.Defense +
+    stats.SpAttack +
+    stats.SpDefense +
+    stats.Speed;
+
+  const maxStat = Math.max(
+    stats.HP,
+    stats.Attack,
+    stats.Defense,
+    stats.SpAttack,
+    stats.SpDefense,
+    stats.Speed,
+  );
 
   return (
     <div className="px-32 py-16">
-      <div className="flex gap-8">
+      <div className="flex justify-center gap-8">
         <Image src={`https://img.pokemondb.net/artwork/${name}.jpg`} />
         <div className="flex flex-col gap-4 text-3xl">
-          <p className="font-bold text-7xl">
-            {name && name[0].toUpperCase() + name.slice(1, name.length)}
-          </p>
+          <p className="font-bold text-7xl">{pokemon.name.english}</p>
 
           <p>French: {pokemon.name.french}</p>
           <p>Japanese: {pokemon.name.japanese}</p>
@@ -50,7 +67,12 @@ export const Pokemon = () => {
 
           <PokemonTypeBadge id={pokemon.id} types={pokemon.type} />
         </div>
+
+        <div className="flex flex-col w-1/2">
+          <PokemonStatsComponent pokemon={pokemon} />
+        </div>
       </div>
+      <p>Total: {statsTotal}</p>
     </div>
   );
 };
