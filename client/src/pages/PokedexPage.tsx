@@ -117,12 +117,15 @@ export const PokedexPage = () => {
     setDebouncedQuery(event.target.value);
   }
 
-  function debounce(fn, delay: number) {
+  function debounce(
+    fn: (event: ChangeEvent<HTMLInputElement>) => void,
+    delay: number,
+  ) {
     let timeoutId: number;
-    return (...args) => {
+    return (event: ChangeEvent<HTMLInputElement>) => {
       clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        fn(...args);
+      timeoutId = window.setTimeout(() => {
+        fn(event);
       }, delay);
     };
   }
