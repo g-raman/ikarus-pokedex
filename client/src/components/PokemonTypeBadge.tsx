@@ -1,6 +1,14 @@
 import PokemonTypeColourMap from "../utils/PokemonTypeColourMap";
 
-export const PokemonTypeBadge = ({ id, type }) => {
+interface PokemonTypeBadgeProps {
+  id: number;
+  type: string;
+}
+
+export const PokemonTypeBadge: React.FC<PokemonTypeBadgeProps> = ({
+  id,
+  type,
+}) => {
   return (
     <div
       className={`rounded-3xl py-1 px-3 min-w-20 text-center ${PokemonTypeColourMap.get(type)}`}
