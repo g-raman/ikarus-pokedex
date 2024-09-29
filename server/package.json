@@ -4,8 +4,8 @@
   "description": "A Pokedex Coding Project for Ikarus Interview",
   "main": "index.ts",
   "scripts": {
-    "dev": "nodemon src/index.ts",
-    "build": "tsc --build ./tsconfig.json && mkdir -p ./dist/data/ && cp ./src/data/pokedex.json ./dist/data/"
+    "dev": "nodemon api/index.ts",
+    "build": "tsc --build ./tsconfig.json && mkdir -p ./dist/data/ && cp ./api/data/pokedex.json ./dist/data/"
   },
   "author": "Raman Gupta",
   "license": "ISC",
