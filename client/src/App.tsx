@@ -1,7 +1,7 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Pokemon } from "./components/Pokemon";
 import { PokedexPage } from "./pages/PokedexPage";
+import { PokemonPage } from "./pages/PokemonPage";
 
 function App() {
   const client = new ApolloClient({
@@ -16,7 +16,7 @@ function App() {
     },
     {
       path: "pokemon/:name",
-      element: <Pokemon />,
+      element: <PokemonPage />,
     },
   ]);
   return (

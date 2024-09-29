@@ -1,9 +1,9 @@
 import { gql, useQuery } from "@apollo/client";
 import { Image, Spin } from "antd";
 import { useParams } from "react-router-dom";
-import { Pokemon as PokemonType } from "../utils/types";
-import { PokemonTypeBadge } from "./PokemonTypeBadge";
-import { PokemonStatsComponent } from "./PokemonStatsComponent";
+import { Pokemon } from "../utils/types";
+import { PokemonTypeBadge } from "../components/PokemonTypeBadge";
+import { PokemonStatsComponent } from "../components/PokemonStatsComponent";
 
 const QUERY_POKEMON = gql`
   query ($name: String) {
@@ -28,14 +28,14 @@ const QUERY_POKEMON = gql`
   }
 `;
 
-export const Pokemon = () => {
+export const PokemonPage = () => {
   const { name } = useParams();
   const { data } = useQuery(QUERY_POKEMON, { variables: { name } });
 
   if (!data) {
     return <Spin size="large" />;
   }
-  const pokemon: PokemonType = data.pokemon;
+  const pokemon: Pokemon = data.pokemon;
   const stats = pokemon.base;
   const statsTotal =
     stats.HP +
