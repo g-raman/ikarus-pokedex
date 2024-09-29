@@ -49,14 +49,18 @@ export const Pokemon = () => {
     <div className="flex flex-col justify-center items-center px-32 py-16 gap-8">
       <div className="flex justify-center gap-8">
         <Image src={`https://img.pokemondb.net/artwork/${name}.jpg`} />
-        <div className="flex flex-col gap-4 text-3xl">
+        <div className="flex flex-col gap-4 text-3xl justify-between">
           <p className="font-bold text-7xl">{pokemon.name.english}</p>
+
+          <div className="flex gap-2 text-base">
+            {pokemon.type.map((type) => (
+              <PokemonTypeBadge id={pokemon.id} type={type} />
+            ))}
+          </div>
 
           <p>French: {pokemon.name.french}</p>
           <p>Japanese: {pokemon.name.japanese}</p>
           <p>Chinese: {pokemon.name.chinese}</p>
-
-          <PokemonTypeBadge id={pokemon.id} types={pokemon.type} />
         </div>
       </div>
 
